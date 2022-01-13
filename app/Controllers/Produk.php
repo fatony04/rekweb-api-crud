@@ -12,6 +12,9 @@ class Produk extends ResourceController
 
     public function index($id = null) // kalo id tidak kosong maka select berdasarkan id
     {
+        $header = $this->request->getServer('HTTP_AUTHORIZATION');
+        if(!$header) return $this->failUnauthorized('Token Required');
+
         $loadModel = new ProdukModel();
 
         $datas['produk'] = $loadModel->orderBy('id', 'DESC')->findAll();
@@ -21,6 +24,9 @@ class Produk extends ResourceController
 
     public function show($id = null)
     {
+        $header = $this->request->getServer('HTTP_AUTHORIZATION');
+        if(!$header) return $this->failUnauthorized('Token Required');
+        
         $model = new ProdukModel();
 
         $data = $model->where('id', $id)->first();
@@ -34,6 +40,9 @@ class Produk extends ResourceController
 
     public function create()
     {
+        $header = $this->request->getServer('HTTP_AUTHORIZATION');
+        if(!$header) return $this->failUnauthorized('Token Required');
+
         $model = new ProdukModel();
 
         $request = [
@@ -67,6 +76,9 @@ class Produk extends ResourceController
 
     public function update($id = null)
     {
+        $header = $this->request->getServer('HTTP_AUTHORIZATION');
+        if(!$header) return $this->failUnauthorized('Token Required');
+        
         $model = new ProdukModel();
 
         $request = [
@@ -100,6 +112,9 @@ class Produk extends ResourceController
 
     public function delete($id = null)
     {
+        $header = $this->request->getServer('HTTP_AUTHORIZATION');
+        if(!$header) return $this->failUnauthorized('Token Required');
+        
         $model = new ProdukModel();
 
         $dataBarang = $model->where('id', $id);
